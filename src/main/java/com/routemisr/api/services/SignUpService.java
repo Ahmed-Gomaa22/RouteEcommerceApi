@@ -21,5 +21,21 @@ public class SignUpService extends BaseService {
         assertEquals(response.jsonPath().getString("user.name"), request.getName());
         assertNotNull(response.jsonPath().getString("token"));
     }
+    public void validateUserCantSignUpWithExistingEmail(Response response, SignUpRequest request) {
+        response.then().statusCode(409);
+        assertEquals(response.jsonPath().getString("message"), "Account Already Exists");
+    }
+    public void validateUserCantSignUpWithInvalidEmail(Response response, SignUpRequest request) {
+        response.then().statusCode(400);
+        assertEquals(response.jsonPath().getString("errors.msg"), "Invalid email ");
+    }
+    public void validateUserCantSignUpWithNoEmailProvided(Response response, SignUpRequest request) {
+        response.then().statusCode(400);
+        assertEquals(response.jsonPath().getString("errors.msg"), "Email is required");
+    }
+    public void validateUserCantSignUpWithInvalidPasswordConfirmation(Response response, SignUpRequest request) {
+        response.then().statusCode(400);
+        assertEquals(response.jsonPath().getString("errors.msg"), "Password confirmation is incorrect");
+    }
 
 }
