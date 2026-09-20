@@ -2,11 +2,11 @@ package com.routemisr.api.models;
 
 public class SignUpRequest {
 
-    private String name;
-    private String password;
-    private String email;
-    private String rePassword;
-    private String phone;
+    private final String name;
+    private final String password;
+    private final String email;
+    private final String rePassword;
+    private final String phone;
 
     public SignUpRequest(String name, String password, String email, String rePassword, String phone) {
         this.name = name;
