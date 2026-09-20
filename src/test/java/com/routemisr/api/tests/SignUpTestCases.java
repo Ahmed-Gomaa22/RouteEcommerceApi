@@ -6,7 +6,7 @@ import com.routemisr.api.testdata.SignUpRequestFactory;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
-public class signUpTestCases {
+public class SignUpTestCases {
     SignUpService signUpService =  new SignUpService();
     @Test
     public void newUserCanSignUpSuccessfully() {
@@ -26,7 +26,6 @@ public class signUpTestCases {
     @Test
     public void userCantSignUpWithInvalidEmail() {
         SignUpRequest invalidEmailUser = SignUpRequestFactory.invalidEmail();
-        signUpService.signUp(invalidEmailUser);
         Response response = signUpService.signUp(invalidEmailUser);
         signUpService.validateUserCantSignUpWithInvalidEmail(response,invalidEmailUser);
     }
@@ -34,7 +33,6 @@ public class signUpTestCases {
     @Test
     public void userCantSignUpWithNoEmailProvided() {
         SignUpRequest noEmailUser = SignUpRequestFactory.missingEmail();
-        signUpService.signUp(noEmailUser);
         Response response = signUpService.signUp(noEmailUser);
         signUpService.validateUserCantSignUpWithNoEmailProvided(response,noEmailUser);
     }
@@ -42,7 +40,6 @@ public class signUpTestCases {
     @Test
     public void userCantSignUpWithWrongPasswordConfirmation() {
         SignUpRequest wrongPassConfirm = SignUpRequestFactory.invalidPasswordConfirmation();
-        signUpService.signUp(wrongPassConfirm);
         Response response = signUpService.signUp(wrongPassConfirm);
         signUpService.validateUserCantSignUpWithInvalidPasswordConfirmation(response,wrongPassConfirm);
     }
